@@ -29,7 +29,6 @@ function [out] = run_DREX_model(x, params)
 %     hazard          prior probability of change, scalar (constant) or vector (time-varying) (default=0.01)
 %     obsnz           observation noise for each feature, vector (default=0.0)
 %     memory          maximum number of context hypotheses, integer (default=inf)
-%     hypstep         time-steps between new context hypotheses, integer (default=1)
 %     maxhyp          maximum number of simultaneous context hypotheses, integer (default=inf)
 %
 % * Priors structure, depends on distribution choice, for example for 'gaussian':
