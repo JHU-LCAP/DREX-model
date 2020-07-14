@@ -82,6 +82,7 @@ out = run_DREX_model(in,params);
 display_DREX_output(out,in);
 ```
 Importantly, all outputs are causal. See [[1]](#related-publications) for additional description.
+
 <br/>
 Outputs can be used as-is or they can be interpreted further depending on the application or experimental paradigm to relate the model to behavioral or neural responses. Several functions were included to interpret these outputs:
 * _post_DREX_prediction.m_ can be used to reconstruct the predictive distribution
