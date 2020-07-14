@@ -18,7 +18,7 @@ This probabilistic prediction is based on a statistical representation of struct
 
 Model code is written in MATLAB. Code was tested using MATLAB R2019b but should be compatible with other versions. 
 
-To get a local copy of the code:
+To obtain a local copy of the code:
 ```
 git clone https://github.com/JHU-LCAP/drex-model.git
 ```
@@ -35,7 +35,7 @@ There are three main steps for using the D-REX model:
 
 #### 1. Define Input 
 
-The input to the model is a T x 1 vector of continous-valued observations. If you wish to apply the D-REX model to an acoustic waveform, a preprocessing step is necessary to extract the input sequence from the acoustic waveform. See [1] for examples of applying the model to real-world audio along various dimensions.
+The input to the model is a vector of continous-valued observations. If you wish to apply the D-REX model to an acoustic waveform, a preprocessing step is necessary to extract the input sequence from the acoustic waveform. See [1] for examples of applying the model to real-world audio along various dimensions.
 
 Exception to the above: if modeling a temporal process (e.g., timing of transient onsets, neural spiking), the input is a binary signal with 1's and 0's indicating the presence or absence of an event, respectively.
 
@@ -62,7 +62,7 @@ The following parameters can be used to manipulate the internal statistical repr
 
 * The _maxhyp_, or maximum hypotheses, parameter is an optional parameter that can also be used to make the model more efficient for processing very long inputs. It prunes the context hypotheses by beliefs when the number of context hypotheses exceeds _maxhyp_. 
 
-All parameters are set as fields in a single structure and passed as input to _run_DREX_model.m_. Default values can be found in the comments at the top of the model code, and additional description can be found in [1].
+All parameters are set as fields in a single structure and passed as input to _run_DREX_model.m_. Default values can be found in the comments at the top of the model code; additional description can be found in [(1)](#related-publications).
 
 #### 3. Interpret Output
 
