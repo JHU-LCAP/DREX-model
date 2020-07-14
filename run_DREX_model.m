@@ -24,9 +24,9 @@ function [out] = run_DREX_model(x, params)
 %
 % * Params structure
 %     distribution    Distribution choice: 'gaussian','lognormal','gmm', or 'poisoon' (default='gaussian')
+%     D               temporal dependence (or interval size for Poisson), integer (default=1, 50 for Poisson), 
 %     prior           structure with priors for sufficient statistics (see below)
 %     hazard          prior probability of change, scalar (constant) or vector (time-varying) (default=0.01)
-%     D               temporal dependence (or interval size for Poisson), integer (default=1, 50 for Poisson), 
 %     obsnz           observation noise for each feature, vector (default=0.0)
 %     memory          maximum number of context hypotheses, integer (default=inf)
 %     hypstep         time-steps between new context hypotheses, integer (default=1)
