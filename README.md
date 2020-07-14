@@ -29,6 +29,8 @@ Add code directory to MATLAB path.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+```output = run_DREX_model(input, params);```
+
 The included MATLAB script, _examples.m_, contains examples of model usage. 
 
 There are three main steps for using the D-REX model:
@@ -74,9 +76,15 @@ The main function _run_DREX_model.m_ returns a structure with three fields conta
 
 * _Prediction_params_ contains the parameters of the predictive distribution for each context hypothesis as they evolved over time. In conjunction with the beliefs, this can be used to reconstruct the predictive distribution at each time.
 
+These three outputs can be visualized with the included function _display_DREX_output.m_, for example:
+```matlab
+out = run_DREX_model(in,params);
+display_DREX_output(out,in);
+```
 Importantly, all outputs are causal. See [[1]](#related-publications) for additional description.
 
-These outputs can be used as-is or they can be interpreted further depending on the application. Several functions were included to interpret these outputs:
+<br/><br/>
+Outputs can be used as-is or they can be interpreted further depending on the application. Several functions were included to interpret these outputs:
 * _post_DREX_prediction.m_ can be used to reconstruct the predictive distribution
 * _post_DREX_changedecision.m_ can be used to apply the model to a change decision paradigm, where a single change in underlying statistics is detected. An input threshold is applied to a probability of change derived from the beliefs. 
 * _post_DREX_beliefdynamics.m_ outputs a measure of the shift in beliefs at each time. It can be used to measure how much the model re-weights the context hypotheses after observing each input.
