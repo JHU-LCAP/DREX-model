@@ -8,7 +8,7 @@ Given a sequence of continuous-valued inputs along any acoustic or perceptual di
   <img src="http://www.sciweavers.org/upload/Tex2Img_1594734125/render.png">
 </p>
 
-This probabilistic prediction is based on a statistical representation of structure (i.e., _regularities_) in the observed sequence. Importantly, the model does not assume stationarity in the input (hence, _dynamic_); rather, the model collects many statistical representations over different context windows (termed _context hypotheses_). These contexts are then weighted by beliefs, or evidence for each context window from the observed sequence. Here is an illustration of how the model builds these robust predictions (taken from [1]):
+This probabilistic prediction is based on a statistical representation of structure (i.e., _regularities_) in the observed sequence. Importantly, the model does not assume stationarity in the input (hence, _dynamic_); rather, the model collects many statistical representations over different context windows (termed _context hypotheses_). These contexts are then weighted by beliefs, or evidence for each context window from the observed sequence. Here is an illustration of how the model builds these robust predictions (taken from [[1]](#related-publications)):
 <br/><br/><br/>
 
 ![Model](image.png)
@@ -35,7 +35,7 @@ There are three main steps for using the D-REX model:
 
 #### 1. Define Input 
 
-The input to the model is a vector of continous-valued observations. If you wish to apply the D-REX model to an acoustic waveform, a preprocessing step is necessary to extract the input sequence from the acoustic waveform. See [1] for examples of applying the model to real-world audio along various dimensions.
+The input to the model is a vector of continous-valued observations. If you wish to apply the D-REX model to an acoustic waveform, a preprocessing step is necessary to extract the input sequence from the acoustic waveform. See [[1]](#related-publications) for examples of applying the model to real-world audio along various dimensions.
 
 Exception to the above: if modeling a temporal process (e.g., timing of transient onsets, neural spiking), the input is a binary signal with 1's and 0's indicating the presence or absence of an event, respectively.
 
@@ -62,7 +62,7 @@ The following parameters can be used to manipulate the internal statistical repr
 
 * The _maxhyp_, or maximum hypotheses, parameter is an optional parameter that can also be used to make the model more efficient for processing very long inputs. It prunes the context hypotheses by beliefs when the number of context hypotheses exceeds _maxhyp_. 
 
-All parameters are set as fields in a single structure and passed as input to _run_DREX_model.m_. Default values can be found in the comments at the top of the model code; additional description can be found in [(1)](#related-publications).
+All parameters are set as fields in a single structure and passed as input to _run_DREX_model.m_. Default values can be found in the comments at the top of the model code; additional description can be found in [[1]](#related-publications).
 
 #### 3. Interpret Output
 
@@ -74,7 +74,7 @@ The main function _run_DREX_model.m_ returns a structure with three fields conta
 
 * _Prediction_params_ contains the parameters of the predictive distribution for each context hypothesis as they evolved over time. In conjunction with the beliefs, this can be used to reconstruct the predictive distribution at each time.
 
-Importantly, all outputs are causal. See [1] for additional description.
+Importantly, all outputs are causal. See [[1]](#related-publications) for additional description.
 
 These outputs can be used as-is or they can be interpreted further depending on the application. Several functions were included to interpret these outputs:
 * _post_DREX_prediction.m_ can be used to reconstruct the predictive distribution
