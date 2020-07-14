@@ -85,8 +85,11 @@ Importantly, all outputs are causal. See [[1]](#related-publications) for additi
 
 <br/>
 Outputs can be used as-is or they can be interpreted further depending on the application or experimental paradigm to relate the model to behavioral or neural responses. Several functions were included to interpret these outputs:
+
 * _post_DREX_prediction.m_ can be used to reconstruct the predictive distribution
+
 * _post_DREX_changedecision.m_ can be used to apply the model to a change decision paradigm, where a single change in underlying statistics is detected. An input threshold is applied to a probability of change derived from the beliefs. 
+
 * _post_DREX_beliefdynamics.m_ outputs a measure of the shift in beliefs at each time. It can be used to measure how much the model re-weights the context hypotheses after observing each input.
 
 <!-- PUBLICATIONS -->
