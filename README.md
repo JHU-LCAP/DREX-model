@@ -2,11 +2,7 @@
 
 The Dynamic Regularity Extraction (D-REX) model is a computational model for predictive processing in auditory perception of sequential sounds. Based in Bayesian inference and theories of predictive coding, the model provides a framework for exploring the computational processes behind predictive coding in complex scenes.
 
-Given a sequence of continuous-valued inputs along any acoustic or perceptual dimension (e.g., pitch, energy), the model produces a prediction at each time given the observed inputs:
-<br/>
-<p align="center">
-  <img src="http://www.sciweavers.org/upload/Tex2Img_1594734125/render.png">
-</p>
+Given a sequence of continuous-valued inputs along any acoustic or perceptual dimension (e.g., pitch, energy), the model produces a prediction at each time given the observed inputs.
 
 This probabilistic prediction is based on a statistical representation of structure (i.e., _regularities_) in the observed sequence. Importantly, the model does not assume stationarity in the input (hence, _dynamic_); rather, the model collects many statistical representations over different context windows (termed _context hypotheses_). These contexts are then weighted by beliefs, or evidence for each context window from the observed sequence. Here is an illustration of how the model builds these robust predictions (taken from [[1]](#related-publications)):
 <br/><br/><br/>
