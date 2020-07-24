@@ -88,6 +88,12 @@ Outputs can be used as-is or they can be interpreted further depending on the ap
 
 * _post_DREX_beliefdynamics.m_ outputs a measure of the shift in beliefs at each time. It can be used to measure how much the model re-weights the context hypotheses after observing each input.
 
+## Example usage
+
+See demo.m for simple demonstrations of model usage.
+
+Examples of predictive processing of real-world audio along different acoustic dimensions included in 'examples' subdirectory (see [[1]](#related-publications) for description).
+ 
 <!-- PUBLICATIONS -->
 ## Related publications
 
