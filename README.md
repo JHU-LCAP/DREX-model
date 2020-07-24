@@ -91,7 +91,7 @@ Outputs can be used as-is or they can be interpreted further depending on the ap
 <!-- PUBLICATIONS -->
 ## Related publications
 
-1. Skerritt-Davis, B. & Elhilali, M. Computational framework for modeling predictive processing of complex sound sequences. _Under review._
+1. Skerritt-Davis, B. & Elhilali, M. Computational framework for predictive processing of complex sound sequences. _Under review._
 
 1. Skerritt-Davis, B. & Elhilali, M. Neural encoding of auditory statistics. _Under review._
 
