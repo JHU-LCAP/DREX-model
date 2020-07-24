@@ -1,3 +1,7 @@
+%% Add path to D-REX model code directory
+addpath(..);
+
+
 %% Simple example of Gaussian sequence with one change
 rng(10);
 
