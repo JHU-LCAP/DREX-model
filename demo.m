@@ -36,7 +36,7 @@ display_DREX_output(out,x)
 
 %% Gaussian mixture example with single wide component in prior
 
-x = [-5+getFractalSequence(2,50), 5+getFractalSequence(2,50)]';
+x = [-5+randn(1,50), 5+randn(1,50)]';
 x = x(randperm(length(x)));
 x = [rand(100,1)*range(x) + min(x); x];
 
@@ -58,7 +58,7 @@ display_DREX_output(out,x)
 
 %% Gaussian mixture example with spread out multi-component prior
 
-x = [-5+getFractalSequence(2,50), 5+getFractalSequence(2,50)]';
+x = [-5+randn(1,50), 5+randn(1,50)]';
 x = x(randperm(length(x)));
 x = [rand(100,1)*range(x) + min(x); x];
 
