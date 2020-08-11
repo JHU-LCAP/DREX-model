@@ -97,7 +97,7 @@ Examples of predictive processing of real-world audio along different acoustic d
 <!-- PUBLICATIONS -->
 ## Related publications
 
-1. Skerritt-Davis, B. & Elhilali, M. Computational framework for predictive processing of complex sound sequences. _Under review._
+1. Skerritt-Davis, B. & Elhilali, M. Computational framework for investigating predictive processing in auditory perception. _Under review._
 
 1. Skerritt-Davis, B. & Elhilali, M. Neural encoding of auditory statistics. _Under review._
 
