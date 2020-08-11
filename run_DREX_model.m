@@ -46,7 +46,6 @@ function [out] = run_DREX_model(x, params)
 % v3
 % Benjamin Skerritt-Davis
 % bsd@jhu.edu
-% 7/4/2020
 
 [ntime, nfeature] = size(x);
 
