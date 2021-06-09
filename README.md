@@ -112,7 +112,7 @@ Examples of predictive processing of real-world audio along different acoustic d
 
 If using this model in a publication, please cite as follows:
 
-TBD
+Skerritt-Davis, B. & Elhilali, M. (2021) Computational framework for investigating predictive processing in auditory perception. Journal of Neuroscience Methods, vol 360, doi.org/10.1016/j.jneumeth.2021.109177.
 
 
 <!-- CONTACT -->
