@@ -526,7 +526,7 @@ covCond = zeros(nkeephyp,nfeature);      % conditional (co)variance
 
 for f = 1:nfeature
     % condition current observation on past d-1 observations
-    if D>1 && sum(isnan(cond_obs)) < length(cond_obs)
+    if D>1 && sum(isnan(cond_obs(:,1))) < length(cond_obs(:,1))
         for hh = 1:nkeephyp
             h = keephyp(hh);
             sigmaJoint = ssT{f}(:,:,h)*(nT{f}(h)+1)/(nT{f}(h)*(nT{f}(h)-D+1));
