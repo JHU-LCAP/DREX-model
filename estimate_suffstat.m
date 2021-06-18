@@ -7,8 +7,8 @@ function suffstat = estimate_suffstat(xs, params)
 % ===INPUT===
 %   xs          multi-trial, multi-feature input sequence in 3D array (time x trial x feature) -OR- cell array, {trial}(time,feature)
 %   params      parameters for D-REX, for example:
-%                   dist    'gaussian', 'lognormal', 'gmm', 'poisson'
-%                   D       temporal dependence (size of covariance structure)
+%                   distribution    'gaussian', 'lognormal', 'gmm', 'poisson'
+%                   D               temporal dependence (size of covariance structure)
 %                   
 % 
 %
