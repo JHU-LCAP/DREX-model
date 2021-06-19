@@ -40,6 +40,7 @@ function [out] = run_DREX_model(x, params)
 %
 % * Output structure
 %     surprisal           surprisal due to each observation in bits (dim: time x feature)
+%     joint_surprisal     surprisal across features (dim: time x 1), features combined with logical-AND (i.e., product of predictive probability across features)
 %     context_beliefs     posterior beliefs for context hypotheses (dim: context-boundary x time)
 %     prediction_params    parameters of predictive distribution at each time (dim: time x feature)
 %
@@ -104,6 +105,7 @@ cond_obs = nan(D-1,nfeature);
 
 % Initialize output arrays
 surprisal = zeros(ntime,nfeature);  % Surprisal at each time for each feature
+joint_surprisal = zeros(ntime,1);   % Surprisal at each time across features
 B = zeros(memory, ntime+1);         % Beliefs, or context posterior, at each time (dim: context_hypothesis x time)
 B(1,1) = 1;                         % context_length=0 at time=0 (i.e., sequence begins at first observation)
 prediction_theta = cell(ntime,1);
@@ -222,8 +224,10 @@ for t = 1:ntime
     % Calculate Surprisal 
     if isnan(obs) % no input, no surprisal
         surprisal(t,:) = nan;
+        joint_surprisal(t,:) = nan;
     else
         surprisal(t,:) = -1*log2(pred.prob'*B(1:min(t,memory),t));
+        joint_surprisal(t,:) = -1*log2(prod(pred.prob,2)'*B(1:min(t,memory),t));
     end
     
     % ==== UPDATE context-beliefs with predictive probabilities ===========
@@ -255,6 +259,7 @@ end
 % ========= OUTPUT ==========
 out.distribution = distribution;
 out.surprisal = surprisal;
+out.joint_surprisal = joint_surprisal;
 out.context_beliefs = B;
 out.prediction_params = prediction_theta;
 
