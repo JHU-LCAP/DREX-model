@@ -1,5 +1,18 @@
 function [Psi,X,Y] = post_DREX_prediction(featureidx, out, pred_pos)
-% Evaluate predictive distribution at positions x at each time
+% Evaluate predictive distribution from D-REX model output
+%
+% ===INPUT===
+%   featureidx  index of feature to generate predictions from model output
+%   out         output structure of D-REX model
+%   pred_pos    vector of positions (in feature dimension) at which to evaluate predictive probability
+%
+% ===OUTPUT===
+%   Psi         Predictive probability at each time evaluated at each position (dim: time x position)
+%   X           horizontal positions for plotting Psi
+%   Y           vertical positions for plotting Psi
+%
+%   NOTE: see 'display_DREX_output.m' for plotting example
+% 
 
 
 distribution = out.distribution;
