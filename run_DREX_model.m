@@ -72,10 +72,6 @@ if ~strcmp(distribution, 'poisson') && any([prior.n{:}] < D); error('prior n''s 
 if isinf(memory) || memory > ntime+1; memory = ntime+1; end
 if memory < 2; error('memory must be greater than 1'); end
 
-% Epsilon for zero-comparison
-eps = 1e-300;
-
-
 % Distribution-specific parameters and parameter checks
 switch distribution
     case 'gmm'
@@ -278,6 +274,9 @@ function R = update_context_posterior(R, pp, hazard, t, maxhyp)
 
 memory = size(R,1);
 
+% floor beliefs less than epsilon to prevent precision errors
+R(R(:,t)<1e-300, t) = 0;
+
 % If no prediction, change prob is 0.
 if isempty(pp)
     R(1:min(t,memory-1), t+1) = R(1:min(t,memory-1), t); % Change prob
@@ -314,9 +313,6 @@ if maxhyp < inf && length(hypidx) >= maxhyp
     R(hypidx(worsthypidx),t+1) = 0;
 end
 
-% floor beliefs less than epsilon to prevent precision errors
-R(R(:,t+1)<eps, t+1) = 0;
-
 % Normalize posterior to sum to 1
 R(:,t+1) = R(:,t+1) / sum(R(:,t+1));
 
@@ -332,7 +328,7 @@ function p = predict_GAUSSIAN(obs, cond_obs, suffstat, beliefs, D, obsnz, scale)
 % condSS: conditional sufficient statistics
 
 % Skip prediction for any hyps with belief=0
-keephyp = find(beliefs > eps);
+keephyp = find(beliefs > 1e-300);
 
 % If silent/missing observation, no prediction to make
 if any(isnan(obs) | isempty(obs))
@@ -436,7 +432,7 @@ nhyp = sum(~isnan(suffstat.n{1}));
 memory = length(suffstat.n{1});
 
 % Skip update for any hyps with belief=0
-keephyp = find(beliefs > eps);
+keephyp = find(beliefs > 1e-300);
 nkeephyp = length(keephyp);
 
 % Replace NaNs with 0s to marginalize over missing context
@@ -466,6 +462,20 @@ for f = 1:nfeature
         suffstat.n{f}(~ismember(1:nhyp,keephyp)) = 0;
     end
     
+    for h = 1:size(suffstat.ss{f},3)
+        if suffstat.n{f}(h)==0 || isnan(suffstat.n{f}(h))
+            continue
+        else
+            try
+                if any(eig(suffstat.ss{f}(:,:,h))<=0)
+                    keyboard
+                end
+            catch
+                keyboard
+            end
+        end
+    end
+    
     % Concatenating new hypothesis
     if ~isempty(prior)
         if nhyp < memory
@@ -481,7 +491,6 @@ for f = 1:nfeature
         end
     end
 end
-
 
 % increment conditioning observations to include new observation
 cond_obs = [cond_obs; obs];
@@ -504,7 +513,7 @@ obs = log(obs);
 cond_obs = log(cond_obs);
 
 % Skip prediction for any hyps with belief=0
-keephyp = find(beliefs > eps);
+keephyp = find(beliefs > 1e-300);
 
 % If silent/missing observation, no prediction to make
 if any(isnan(obs) | isempty(obs))
@@ -607,7 +616,7 @@ nhyp = sum(~isnan(suffstat.n{1}));
 memory = length(suffstat.n{1});
 
 % Skip update for any hyps with belief=0
-keephyp = find(beliefs > eps);
+keephyp = find(beliefs > 1e-300);
 nkeephyp = length(keephyp);
 
 % Replace NaNs with 0s to marginalize over missing context
@@ -669,7 +678,7 @@ function p = predict_GMM(obs, suffstat, beliefs, obsnz, scale)
 % condSS: conditional sufficient statistics
 
 % Skip prediction for any hyps with belief=0
-keephyp = find(beliefs > eps);
+keephyp = find(beliefs > 1e-300);
 
 % If silent/missing observation, no prediction to make
 if any(isnan(obs) | isempty(obs))
@@ -845,7 +854,7 @@ function p = predict_POISSON(obs, cond_obs, suffstat, beliefs, scale)
 % condSS: conditional sufficient statistics
 
 % Skip prediction for any hyps with belief=0
-keephyp = find(beliefs > eps);
+keephyp = find(beliefs > 1e-300);
 
 % If silent/missing observation, no prediction to make
 if any(isnan(obs) | isempty(obs))
@@ -921,7 +930,7 @@ nhyp = sum(~isnan(suffstat.n{1}));
 memory = length(suffstat.n{1});
 
 % Skip update for any hyps with belief=0
-keephyp = find(beliefs > eps);
+keephyp = find(beliefs > 1e-300);
 nkeephyp = length(keephyp);
 
 % Replace NaNs with 0s to marginalize over missing context
