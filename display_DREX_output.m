@@ -1,10 +1,10 @@
-function display_DREX_output(mdl, x)
+function display_DREX_output(mdl_out, feat_in)
 % Usage: display_DREX_output(mdl, x)
 % Helper function for displaying D-REX Model output
 %
 % Input Arguments:
-%   mdl                   output from run_DREX_model.m
-%   x                     sequence of observations
+%   mdl_out              output from run_DREX_model.m
+%   feat_in              input sequence of observations
 %
 % v2
 % Benjamin Skerritt-Davis
@@ -13,14 +13,14 @@ function display_DREX_output(mdl, x)
 
 clf;
 
-if sum(size(x)>1)==1 % single feature observations
-    x = reshape(x,[],1);
-elseif size(x,1) < size(x,2) % assume more time-pts than features
+if sum(size(feat_in)>1)==1 % single feature observations
+    feat_in = reshape(feat_in,[],1);
+elseif size(feat_in,1) < size(feat_in,2) % assume more time-pts than features
     error('x dim should be: time x numFeatures');
 end
-numFeatures = size(x,2);
+numFeatures = size(feat_in,2);
 
-time = 1:length(x);
+time = 1:length(feat_in);
 
 col = lines(numFeatures);
 
@@ -35,16 +35,16 @@ nlevel = 500;
 PD = [];
 
 for f = 1:numFeatures
-    if ~strcmp(mdl.distribution,'poisson') 
+    if ~strcmp(mdl_out.distribution,'poisson') 
         if f > 1
-            yshift = yshift+ max(x(:,f-1)) - min(x(:,f)) + 0.5*range(x(:,f));
+            yshift = yshift+ max(feat_in(:,f-1)) - min(feat_in(:,f)) + 0.5*range(feat_in(:,f));
         else
             yshift = 0;
         end
         hold all;
-        if isfield(mdl, 'prediction_params')
+        if isfield(mdl_out, 'prediction_params')
             
-            [PD,X,Y] = post_DREX_prediction(f,mdl,linspace(min(x(:,f)) - 0.1*range(x(:,f)),max(x(:,f)) + 0.1*range(x(:,f)),100));
+            [PD,X,Y] = post_DREX_prediction(f,mdl_out,linspace(min(feat_in(:,f)) - 0.1*range(feat_in(:,f)),max(feat_in(:,f)) + 0.1*range(feat_in(:,f)),100));
             try
             contourf(X,Y+yshift,PD,nlevel,'fill','on','linestyle','-','linecolor','none');%0.6*[1 1 1])
             catch
@@ -52,18 +52,18 @@ for f = 1:numFeatures
             end
             set(gca,'colormap',cmap);
         else
-            Y = [min(x) max(x)];
+            Y = [min(feat_in) max(feat_in)];
         end
-        prettyplot_sequence(x(:,f),3,gcf,false,col(f,:)*0.5,yshift);
+        prettyplot_sequence(feat_in(:,f),3,gcf,false,col(f,:)*0.5,yshift);
         hold off;
     else
         Y = [0 1];
-        stem(x,'marker','none','linewidth',1);
+        stem(feat_in,'marker','none','linewidth',1);
     end
 end
 hold off;
 title('Observations')
-xlim([1 length(x)+1])
+xlim([1 length(feat_in)+1])
 xlabel('Time');
 xticks = get(gca,'XTick');
 xticklabels = xticks;
@@ -78,18 +78,18 @@ end
 
 
 subplot(3,1,2);
-mdl.context_beliefs(mdl.context_beliefs==0) = nan;
-sz = size(mdl.context_beliefs);
+mdl_out.context_beliefs(mdl_out.context_beliefs==0) = nan;
+sz = size(mdl_out.context_beliefs);
 
 newcp = nan(sz(2)*[1 1]); % Bend context posterior back for display
-newcp(1:sz(1),1:sz(1)) = mdl.context_beliefs(:,1:sz(1));
+newcp(1:sz(1),1:sz(1)) = mdl_out.context_beliefs(:,1:sz(1));
 for t = 1+sz(1):sz(2)
-    newcp(t-sz(1)+1:t,t) = mdl.context_beliefs(:,t);
+    newcp(t-sz(1)+1:t,t) = mdl_out.context_beliefs(:,t);
 end
 
 p = pcolor(1+(0:sz(2)-1),1+(0:sz(2)-1),log10(newcp));
 set(gca,'Color',0.95*ones(1,3),'colormap',parula);
-xlim([1 size(x,1)+1])
+xlim([1 size(feat_in,1)+1])
 p.LineStyle = 'none';
 axis xy;
 title('P( c_i | x_{1:t} )')
@@ -102,12 +102,12 @@ grid on;
 
 subplot(3,1,3)
 for f = 1:numFeatures
-    plot((1:size(x,1)), mdl.surprisal(:,f),'-','color',col(f,:),'LineWidth',1);
+    plot((1:size(feat_in,1)), mdl_out.surprisal(:,f),'-','color',col(f,:),'LineWidth',1);
     hold all;
-    scatter((1:size(x,1)), mdl.surprisal(:,f),20,col(f,:),'filled');
+    scatter((1:size(feat_in,1)), mdl_out.surprisal(:,f),20,col(f,:),'filled');
 end
 hold off;
-xlim([0 size(x,1)+1])
+xlim([0 size(feat_in,1)+1])
 title('Surprisal')
 xlabel('Time');
 ylabel('Surprisal (bits)')

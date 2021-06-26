@@ -22,6 +22,10 @@ function suffstat = estimate_suffstat(xs, params)
 %     ss{f}       prior sum of squares (size: D x D)
 %     n{f}        prior observation count (size: 1 x 1)
 %         
+%
+% NOTE: If covariance estimate has a negative eigenvalue (i.e., not positive-definite), regularization is added
+%
+%
 % v2
 % Benjamin Skerritt-Davis
 % bsd@jhu.edu
@@ -77,6 +81,21 @@ switch dist
             suffstat.mu{f} = ones(D,1)*mean(mu,1);
             suffstat.ss{f} = toeplitz( sum(ss .* repmat(n,1,D),1)/sum(n) );
             suffstat.n{f} = D;
+            
+            eig_ss = eig(suffstat.ss{f});
+            if any(eig_ss<0)
+                lambdas = 0.1.^(10:-1:1);
+                min_eig_ss = min(eig_ss);
+                regularizer = lambdas(find(lambdas > abs(min_eig_ss), 1, 'first'));
+                
+                suffstat.ss{f} = suffstat.ss{f} + eye(D)*regularizer;
+                
+                warning('Regularization added to feature %u to ensure positive-definite covariance: %f', f, regularizer);
+                
+                if any(eig(suffstat.ss{f}) < 0)
+                    error('regularization didn''t work!')
+                end
+            end     
         end
 
     case 'lognormal'
