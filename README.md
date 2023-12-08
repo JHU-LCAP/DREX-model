@@ -101,11 +101,11 @@ Examples of predictive processing of real-world audio along different acoustic d
 
 1. Skerritt-Davis, B. & Elhilali, M. (2021) [Neural Encoding of Auditory Statistics.](https://engineering.jhu.edu/lcap/data/uploads/pdfs/jneurosci2021_skerritt.pdf) Journal of Neuroscience, 41(31):6726-6739.
 
-1. Kothinti, S., Skerritt-Davis, B., Nair, A. & Elhilali, M. [Synthesizing Engaging Music Using Dynamic Models of Statistical Surprisal.](https://ieeexplore.ieee.org/document/9054500) In _ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)_, pages 761-765, IEEE, 2020.
+1. Kothinti, S., Skerritt-Davis, B., Nair, A. & Elhilali, M. (2020) [Synthesizing Engaging Music Using Dynamic Models of Statistical Surprisal.](https://ieeexplore.ieee.org/document/9054500) In _ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)_, pages 761-765, IEEE.
 
-1. Skerritt-Davis, B. & Elhilali, M. [A Model for Statistical Regularity Extraction from Dynamic Sounds.](http://dx.doi.org/10.3813/AAA.919279) _Acta Acustica united with Acustica_, 105(1):1-4, 2019.
+1. Skerritt-Davis, B. & Elhilali, M. (2019) [A Model for Statistical Regularity Extraction from Dynamic Sounds.](http://dx.doi.org/10.3813/AAA.919279) _Acta Acustica united with Acustica_, 105(1):1-4.
 
-1. Skerritt-Davis, B. & Elhilali, M. [Detecting change in stochastic sound sequences.](http://dx.doi.org/10.1371/journal.pcbi.1006162) _PLOS Computational Biology_, 14(5):e1006162, 2018.
+1. Skerritt-Davis, B. & Elhilali, M. (2018) [Detecting change in stochastic sound sequences.](http://dx.doi.org/10.1371/journal.pcbi.1006162) _PLOS Computational Biology_, 14(5):e1006162.
 
 <!-- LICENSE -->
 ## Citation
