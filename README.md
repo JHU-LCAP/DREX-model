@@ -97,9 +97,9 @@ Examples of predictive processing of real-world audio along different acoustic d
 <!-- PUBLICATIONS -->
 ## Related publications
 
-1. Skerritt-Davis, B. & Elhilali, M. Computational framework for investigating predictive processing in auditory perception. _Under review._
+1. Skerritt-Davis, B. & Elhilali, M. (2021) Computational framework for investigating predictive processing in auditory perception. Journal of Neuroscience Methods, vol 360, doi.org/10.1016/j.jneumeth.2021.109177.
 
-1. Skerritt-Davis, B. & Elhilali, M. Neural encoding of auditory statistics. _Under review._
+1. Skerritt-Davis, B. & Elhilali, M. (2021) Neural Encoding of Auditory Statistics. Journal of Neuroscience, 41(31):6726-6739.
 
 1. Kothinti, S., Skerritt-Davis, B., Nair, A. & Elhilali, M. [Synthesizing Engaging Music Using Dynamic Models of Statistical Surprisal.](https://ieeexplore.ieee.org/document/9054500) In _ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)_, pages 761-765, IEEE, 2020.
 
